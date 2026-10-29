@@ -1,0 +1,179 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<title>Scrapling · 规范 v2 样张</title>
+<link rel="stylesheet" href="../../engine/web/hz.css">
+<link rel="stylesheet" href="../../engine/web/hz_3d.css">
+<style>
+:root{
+  --c-bg:#E4E7E1; --c-ink:#121412; --c-mute:#7A8176; --c-main:#5CB81A; --c-accent:#FF5A1F; --c-mark:#FFE14A;
+  --c-card:#F6F8F3; --c-line:#D2D6CC; --c-dark:#0B0C0A; --c-on-main:#FFFFFF;
+}
+html:root{--hz-shadow:color-mix(in srgb,var(--c-ink) 24%,transparent)}
+html,body{background:var(--c-bg)!important;margin:0;overflow:hidden}
+.ghost{opacity:.07}
+.hz-w-term{width:700px} .hz-w-term .ln{font-size:24px}
+</style></head>
+<body>
+<script>window.onerror = (m, s, l, c) => { window.__e = (window.__e || "") + " | " + m + " @" + String(s).split("/").pop() + ":" + l + ":" + c; };</script>
+<script src="../../engine/web/hz.js"></script>
+<script src="../../engine/web/hz_canvas.js"></script>
+<script src="../../engine/web/hz_ui3d.js"></script>
+<script src="../../engine/web/hz_3d.js"></script>
+<script src="../../engine/web/hz_type.js"></script>
+<script src="../../engine/web/hz_kit.js"></script>
+<script>
+const W = 1920, H = 1080, DUR = 27.6;
+const sp = hz.space({ W, H, persp: 1600, fps: 30, light: 0.45, vignette: 0.3, grain: 0.06, mblur: 0.16 });
+const T = hz.t, K = hz.k;
+const mk = (tag, cls, par, css, html) => { const e = document.createElement(tag); if (cls) e.className = cls; if (css) e.style.cssText = css; if (html != null) e.innerHTML = html; if (par) par.appendChild(e); return e; };
+
+// ============ 段表(时间与 02_段表.json 一致)============
+const SEG = { 1: 0, 2: 2.45, 3: 3.8, 4: 6.26, 5: 9.7, 6: 13.3, 7: 17.1, 8: 19.55, 9: 24.45 };
+// 截图(size / boxes 照抄 assets/shots/*.json)
+const SH = {
+  gh: { src: "assets/shots/gh_repo.png", size: [2880, 1800], boxes: { title: [0.1, 0.2111, 0.0604, 0.0256], star: [0.8432, 0.2089, 0.079, 0.0311] } },
+  pypi: { src: "assets/shots/pypi.png", size: [2560, 1600], boxes: { pip: [0.0742, 0.2783, 0.1716, 0.06] } },
+  docs: { src: "assets/shots/docs_adaptive.png", size: [2560, 1600], boxes: { h1: [0.2578, 0.2913, 0.4844, 0.0457] } },
+  fetch: { src: "assets/shots/gh_fetching.png", size: [1740, 1144], boxes: { tls: [0.0552, 0.028, 0.9264, 0.0839], antibot: [0.0552, 0.2098, 0.9264, 0.0839] } },
+  quotes: { src: "assets/shots/quotes.png", size: [2560, 1600], boxes: { quote: [0.0547, 0.1476, 0.5859, 0.1677] } },
+};
+const shot = (k, o) => K.shot(o.par, Object.assign({}, SH[k], o));
+
+// ============ 空间:每段一个布景原点;镜头在段起点前 0.05 秒起飞、段起点后 0.45 秒急停到位 ============
+const O = (i) => [(i - 1) * 3200, i % 2 ? -40 : 50, -((i - 1) % 3) * 140];
+const YAW = { 1: 6, 2: -4, 3: 4, 4: -4, 5: 4, 6: -3, 7: 4, 8: -3, 9: 0 };
+const ARR = (i) => (i === 1 ? 0 : SEG[i] + 0.45);
+sp.shots(Object.keys(SEG).map(Number).map((i) => ({ t: ARR(i), d: 0.5, at: O(i), dist: 1600, yaw: YAW[i], pitch: i === 1 ? 5 : 2, focus: 100, ap: 7, ca: 0.3,
+  drift: { yaw: -YAW[i] * 0.12, dist: -10 } })));
+// 屏幕点 (sx,sy) + 前移 dz → 世界点(按该段机位到位时刻算);dz:前景 200~260 / 中景 0 / 远景 -700
+const at = (i, sx, sy, dz) => sp.place(ARR(i) + 0.01, sx, sy, dz);
+const Lr = (i, sx, sy, dz, q = {}) => { const p = at(i, sx, sy, dz); return sp.layer(Object.assign({}, q, { x: p[0], y: p[1], z: p[2] })); };
+const TX = (i, sx, sy, dz, cls, size, css) => { const l = Lr(i, sx, sy, dz, { anchor: "l" }); cls.split(" ").forEach((c) => c && l.in.classList.add(c)); l.in.style.fontSize = size + "px"; if (css) l.in.style.cssText += ";" + css; return l; };
+const outAll = (ls, t) => ls.forEach((l) => T.out(l.in || l, t, { mode: "blur", d: 0.25 }));
+// 代码上色:标签名 / 关键字 → k,字符串 → s,注释 → c
+const tok = (s) => { const out = []; let last = 0;
+  s.replace(/(<\/?)([\w-]+)|("[^"]*"|'[^']*')|(#.*$)|\b(if|not|True)\b/g, (m, lt, tag, str, cm, kw, idx) => {
+    if (idx > last) out.push([s.slice(last, idx)]);
+    if (tag) { out.push([lt]); out.push([tag, "k"]); } else if (str) out.push([str, "s"]); else if (cm) out.push([cm, "c"]); else out.push([kw, "k"]);
+    last = idx + m.length; return m; });
+  if (last < s.length) out.push([s.slice(last)]); return out; };
+
+// ===== 段 1 · 0.00–2.45 · hook · 纯字开场 =====
+{
+  const a = TX(1, 250, 300, 200, "f-song7", 58); T.in(a.in, "爬虫界的", 0.05, { mode: "rise", gap: 0.04, d: 0.4 });
+  const b = TX(1, 230, 560, 260, "f-song", 230); T.in(b.in, "核弹级", 0.72, { mode: "drop", d: 0.32, s0: 1.3 });
+  T.marker(b.in.groups[0], 1.15, { top: "0.55em" });
+  const c = TX(1, 250, 800, 200, "f-song7", 66); T.in(c.in, "开源项目来了", 1.2, { mode: "rise", gap: 0.035, d: 0.4 });
+  const g = TX(1, 1150, 330, -900, "f-brand ghost", 420); g.in.textContent = "SCRAPE"; g.dofK = 2;
+  outAll([a, b, c], 2.5);
+}
+
+// ===== 段 2 · 2.45–3.80 · 记住这个项目:仓库页 + 框选仓库名 =====
+{
+  const card = Lr(2, 960, 610, 0);
+  const s = shot("gh", { par: card.in, crop: [0.05, 0.15, 0.55, 0.25], w: 1200 });
+  T.pop(card.in, 2.45, { s0: 0.9, d: 0.4 });
+  K.frame(s, s.box("title", 4), { t0: 2.6, d: 0.4, label: "D4Vinci / Scrapling", dim: 0.3 });
+  const tt = TX(2, 320, 290, 200, "f-song", 92); T.in(tt.in, "记住这个项目", 2.55, { mode: "rise", gap: 0.03, d: 0.35 });
+  outAll([card, tt], 3.85);
+}
+
+// ===== 段 3 · 3.80–6.26 · 技术上限:PyPI 页(中景)+ 终端安装(前景)=====
+{
+  const card = Lr(3, 650, 640, 0);
+  const s = shot("pypi", { par: card.in, crop: [0, 0.03, 0.62, 0.4], w: 980 });
+  T.pop(card.in, 3.85, { s0: 0.9, d: 0.4 });
+  K.frame(s, s.box("pip", 2), { t0: 3.95, d: 0.4, label: "官方安装命令" });
+  const tl = Lr(3, 1330, 690, 200);
+  hz.w.terminal(tl.in, [{ cmd: "pip install scrapling", at: 4.25, cps: 36, enter: 0.25, wait: 0.2, out: [{ s: "Successfully installed scrapling-0.5", ok: true }] }], { title: "zsh", rows: 4 });
+  T.pop(tl.in, 4.05, { s0: 0.92, d: 0.35, dy: 30 });
+  const tt = TX(3, 200, 250, 220, "f-song", 110); T.in(tt.in, "技术上限", 4.0, { mode: "rise", gap: 0.045, d: 0.5 });
+  T.marker(tt.in.groups[0], 5.45, { top: "0.55em" });
+  outAll([card, tl, tt], 6.3);
+}
+
+// ===== 段 4 · 6.26–9.70 · 90K Stars:仓库页大图 + 数字滚动 + 框选星标 =====
+{
+  const card = Lr(4, 1230, 610, 0);
+  const s = shot("gh", { par: card.in, crop: [0.38, 0.12, 0.58, 0.32], w: 1240 });
+  T.pop(card.in, 6.3, { s0: 0.9, d: 0.45 });
+  K.frame(s, s.box("star", 4), { t0: 8.35, d: 0.4, label: "★ 90.3k" });
+  const n = TX(4, 120, 470, 220, "f-num", 130); T.count(n.in, 0, 90271, 7.85, 0.8, { sep: true });
+  const sub = TX(4, 130, 610, 200, "f-brand", 56); T.in(sub.in, "GitHub Stars", 7.0, { mode: "rise", gap: 0.02, d: 0.35 });
+  outAll([card, n, sub], 9.75);
+}
+
+// ===== 段 5 · 9.70–13.30 · 智能识别:官方文档(中景)+ 改版前后 HTML(前景)=====
+{
+  const card = Lr(5, 530, 590, 0);
+  const s = shot("docs", { par: card.in, crop: [0.245, 0.18, 0.52, 0.52], w: 820 });
+  T.pop(card.in, 9.75, { s0: 0.9, d: 0.45 });
+  K.frame(s, s.box("h1", 4), { t0: 10.55, d: 0.4, label: "自适应抓取" });
+  const sw = Lr(5, 1390, 640, 180);
+  const before = K.code(null, ['<div class="container">', '  <section class="products">', '    <article class="product" id="p1">', "      <h3>Product 1</h3>"].map(tok), { title: "products.html", light: true, w: 760, size: 20, t0: 10.9 });
+  const after = K.code(null, ['<div class="new-container">', '  <div class="product-wrapper">', '    <section class="products">', '      <article class="product new-class" data-id="p1">', '        <div class="product-info">'].map(tok), { title: "products.html", light: true, w: 760, size: 20, t0: 12.42 });
+  K.swap(sw.in, { before, after, at: 12.3, t0: 11.0, w: 760, h: 270 });
+  T.pop(sw.in, 10.6, { s0: 0.92, d: 0.4, dx: 60 });
+  const tt = TX(5, 140, 200, 220, "f-song", 104); T.in(tt.in, "智能识别", 10.45, { mode: "drop", d: 0.32, s0: 1.4 });
+  T.marker(tt.in.groups[0], 10.9, { top: "0.55em" });
+  outAll([card, sw, tt], 13.3);
+}
+
+// ===== 段 6 · 13.30–17.10 · 自动精准抓取:改版后 HTML(中景)+ 官方示例代码(前景)=====
+{
+  const back = Lr(6, 1500, 400, -700); back.dofK = 1.5;
+  shot("docs", { par: back.in, crop: [0.245, 0.5, 0.52, 0.5], w: 900 }).style.opacity = 0.6;
+  T.pop(back.in, 13.3, { d: 0.4 });
+  const hl = Lr(6, 560, 470, 0);
+  const html = K.code(hl.in, ['<div class="new-container">', '  <div class="product-wrapper">', '    <section class="products">', '      <article class="product new-class" data-id="p1">', '        <div class="product-info">'].map(tok), { title: "改版后 · products.html", light: true, w: 760, size: 20, t0: 13.75 });
+  T.pop(hl.in, 13.4, { s0: 0.92, d: 0.4 });
+  const pl = Lr(6, 1290, 760, 200);
+  K.code(pl.in, ["element = page.css('#p1', auto_save=True)", "if not element:  # One day website changes?", "    element = page.css('#p1', adaptive=True)  # Scrapling still finds it!"].map(tok),
+    { title: "adaptive.py", w: 1000, size: 20, t0: 13.6, typeAt: 13.75, cps: 80, hl: [{ line: 3, at: 15.6 }] });
+  T.pop(pl.in, 13.55, { s0: 0.94, d: 0.35, dy: 40 });
+  K.frame(hl.in, html.line(4), { t0: 15.75, d: 0.4, pad: 2, r: 6, label: "#p1 照样找到", labelAt: "right" });
+  const tt = TX(6, 1080, 230, 220, "f-song", 84); T.in(tt.in, "自动精准抓取", 15.45, { mode: "rise", gap: 0.03, d: 0.35 });
+  T.marker(tt.in.groups[0], 15.95, { top: "0.55em" });
+  outAll([back, hl, pl, tt], 17.1);
+}
+
+// ===== 段 7 · 17.10–19.55 · 动态加载:浏览器假窗 地址栏 → 转圈 → 真实页面 → 框选 =====
+{
+  const bl = Lr(7, 1200, 590, 0);
+  const br = K.browser(bl.in, { w: 1060, url: "quotes.toscrape.com", typeAt: 17.3, cps: 34, load: [17.55, 18.15], src: SH.quotes.src, size: SH.quotes.size, boxes: SH.quotes.boxes, crop: [0, 0.03, 0.72, 0.42] });
+  T.pop(bl.in, 17.15, { s0: 0.92, d: 0.4 });
+  K.frame(bl.in, K.rel(br.shot.box("quote", 2), br.shot, bl.in), { t0: 18.2, d: 0.4, label: "抓到内容", labelAt: "left" });
+  const tt = TX(7, 120, 430, 220, "f-smiley", 120); T.in(tt.in, "动态加载", 18.25, { mode: "drop", d: 0.32, s0: 1.4 });
+  const cl = Lr(7, 130, 590, 200, { anchor: "l" });
+  const chip = T.chip(cl.in, { dark: true, css: "font-family:'JetBrains Mono';font-weight:600;font-size:32px" }); T.in(chip.tx, "StealthyFetcher", 17.4, { mode: "scatter", gap: 0.02, d: 0.25 });
+  outAll([bl, tt, cl], 19.55);
+}
+
+// ===== 段 8 · 19.55–24.45 · 反爬:满幅暗场 + README 能力清单逐条框选 + pills 点亮 =====
+{
+  K.dark(sp, [[19.45, 24.2]]);
+  const card = Lr(8, 560, 600, 0);
+  const s = shot("fetch", { par: card.in, w: 900 });
+  T.pop(card.in, 19.6, { s0: 0.9, d: 0.45 });
+  K.frame(card.in, s.box("tls", 2), { t0: 19.95, d: 0.4, t1: 21.3, label: "TLS 指纹伪装", labelAt: "top" });
+  K.frame(card.in, s.box("antibot", 2), { t0: 21.45, d: 0.4, label: "反爬绕过", labelAt: "top" });
+  const tt = TX(8, 1130, 330, 220, "f-song", 104, "color:var(--c-card)"); T.in(tt.in, "反爬手段", 21.5, { mode: "rise", gap: 0.045, d: 0.4 });
+  const pl = Lr(8, 1130, 640, 200, { anchor: "l" });
+  K.pills(pl.in, ["TLS 指纹伪装", "Cloudflare Turnstile", "代理轮换", "DNS 防泄漏", "广告拦截"], { t0: 22.3, at: 22.6, gap: 0.2, w: 620 });
+  outAll([card, tt, pl], 24.2);
+}
+
+// ===== 段 9 · 24.45–27.60 · 收尾:仓库名片条 + 星标脉冲 =====
+{
+  const card = Lr(9, 960, 700, 0);
+  const s = shot("gh", { par: card.in, crop: [0.05, 0.155, 0.9, 0.09], w: 1500 });
+  T.pop(card.in, 24.55, { s0: 0.94, d: 0.45 });
+  K.pulse(s, s.box("star", 4), { t0: 25.95 });
+  const tt = TX(9, 260, 420, 220, "f-song", 120); T.in(tt.in, "拿来就能上手", 24.6, { mode: "rise", gap: 0.04, d: 0.45 });
+  T.marker(tt.in.groups[0], 25.95, { top: "0.55em" });
+  const u = TX(9, 270, 860, 200, "f-mono", 34, "color:var(--c-mute)"); T.in(u.in, "github.com/D4Vinci/Scrapling", 25.1, { mode: "type", cps: 30 });
+}
+
+document.fonts.ready.then(() => hz.start(DUR));
+</script>
+</body></html>

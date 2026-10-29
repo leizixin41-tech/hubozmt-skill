@@ -1,0 +1,31 @@
+/* hz.css —— 网页场景基础样式。字体只用字体库里的(免费可商用)。路径相对于 episodes/<本期>/ */
+@font-face { font-family: "Inter"; font-weight: 300; src: url("../../library/字体库/Inter/Inter-Light.otf"); }
+@font-face { font-family: "Inter"; font-weight: 400; src: url("../../library/字体库/Inter/Inter-Regular.otf"); }
+@font-face { font-family: "Inter"; font-weight: 500; src: url("../../library/字体库/Inter/Inter-Medium.otf"); }
+@font-face { font-family: "Inter"; font-weight: 600; src: url("../../library/字体库/Inter/Inter-SemiBold.otf"); }
+@font-face { font-family: "Inter"; font-weight: 700; src: url("../../library/字体库/Inter/Inter-Bold.otf"); }
+@font-face { font-family: "Inter"; font-weight: 800; src: url("../../library/字体库/Inter/Inter-ExtraBold.otf"); }
+@font-face { font-family: "Noto Sans SC"; font-weight: 300; src: url("../../library/字体库/NotoSansSC/NotoSansSC-Light.otf"); }
+@font-face { font-family: "Noto Sans SC"; font-weight: 400; src: url("../../library/字体库/NotoSansSC/NotoSansSC-Regular.otf"); }
+@font-face { font-family: "Noto Sans SC"; font-weight: 500; src: url("../../library/字体库/NotoSansSC/NotoSansSC-Medium.otf"); }
+@font-face { font-family: "Noto Sans SC"; font-weight: 700; src: url("../../library/字体库/NotoSansSC/NotoSansSC-Bold.otf"); }
+@font-face { font-family: "JetBrains Mono"; src: url("../../library/字体库/JetBrainsMono/JetBrainsMono[wght].ttf"); font-weight: 100 800; }
+
+html, body { margin: 0; width: 100vw; height: 100vh; overflow: hidden; background: #000; }
+body { font-family: "Inter", "Noto Sans SC", sans-serif; -webkit-font-smoothing: antialiased; }
+* { box-sizing: border-box; transition: none !important; }
+iframe.ui * { transition: unset; }
+.sc { position: absolute; inset: 0; overflow: hidden; perspective: 1800px; }
+.c { position: absolute; left: 50%; top: 50%; }
+.p3 { transform-style: preserve-3d; }
+.caret { display: inline-block; width: 0.08em; height: 1em; margin-left: 0.06em; background: currentColor; vertical-align: -0.12em; border-radius: 2px; }
+iframe.ui { border: 0; display: block; background: transparent; }
+.mono { font-family: "JetBrains Mono", monospace; }
+@font-face { font-family: "Space Grotesk"; src: url("../../library/字体库/SpaceGrotesk/SpaceGrotesk[wght].ttf"); font-weight: 300 700; }
+@font-face { font-family: "Instrument Serif"; src: url("../../library/字体库/InstrumentSerif/InstrumentSerif-Regular.ttf"); }
+@font-face { font-family: "Instrument Serif"; font-style: italic; src: url("../../library/字体库/InstrumentSerif/InstrumentSerif-Italic.ttf"); }
+/* 无限画布 */
+.world { position: absolute; left: 0; top: 0; width: 0; height: 0; transform-origin: 0 0; }
+.node { position: absolute; width: 0; height: 0; }
+.node > * { position: absolute; }
+.ch { display: inline-block; white-space: pre; }

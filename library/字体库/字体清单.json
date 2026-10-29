@@ -1,0 +1,252 @@
+{
+ "说明": "本文件登记字体库里每一个字体及其授权。新增字体必须先登记:授权必须是『免费且允许商用』(SIL OFL / Apache / 同等许可)。",
+ "字体": [
+  {
+   "目录": "NotoSansSC",
+   "字体名": "思源黑体 Noto Sans SC",
+   "对应角色": "sans / grot(中文) / mono(中文)",
+   "授权": "SIL OFL 1.1",
+   "商用": "是",
+   "授权文件": [],
+   "来源": "https://github.com/notofonts/noto-cjk",
+   "适合用途": "中文 UI、正文、解释句",
+   "备注": "Light/Regular/Medium/Bold 四个静态字重",
+   "文件": [
+    "NotoSansSC-Bold.otf",
+    "NotoSansSC-Light.otf",
+    "NotoSansSC-Medium.otf",
+    "NotoSansSC-Regular.otf"
+   ],
+   "下载日期": "2026-10-20"
+  },
+  {
+   "目录": "Inter",
+   "字体名": "Inter",
+   "对应角色": "sans(拉丁)",
+   "授权": "SIL OFL 1.1",
+   "商用": "是",
+   "授权文件": [],
+   "来源": "https://github.com/rsms/inter",
+   "适合用途": "拉丁 UI、数字、英文小注",
+   "备注": "Light–Black 全字重",
+   "文件": [
+    "Inter-Black.otf",
+    "Inter-Bold.otf",
+    "Inter-ExtraBold.otf",
+    "Inter-Light.otf",
+    "Inter-Medium.otf",
+    "Inter-Regular.otf",
+    "Inter-SemiBold.otf"
+   ],
+   "下载日期": "2026-10-20"
+  },
+  {
+   "目录": "NotoSerifSC",
+   "字体名": "思源宋体 Noto Serif SC",
+   "对应角色": "serif / serif2(中文)",
+   "授权": "SIL OFL 1.1",
+   "商用": "是",
+   "授权文件": [
+    "OFL.txt"
+   ],
+   "来源": "https://github.com/google/fonts/tree/main/ofl/notoserifsc",
+   "适合用途": "编辑风关键词、杂志感、安静的大字",
+   "备注": "可变字重 200–900",
+   "文件": [
+    "NotoSerifSC[wght].ttf"
+   ],
+   "下载日期": "2026-10-20"
+  },
+  {
+   "目录": "Fraunces",
+   "字体名": "Fraunces",
+   "对应角色": "serif(拉丁)",
+   "授权": "SIL OFL 1.1",
+   "商用": "是",
+   "授权文件": [
+    "OFL.txt"
+   ],
+   "来源": "https://github.com/google/fonts/tree/main/ofl/fraunces",
+   "适合用途": "拉丁衬线展示字、有性格的标题",
+   "备注": "可变:光学尺寸/字重/柔和度/怪异度",
+   "文件": [
+    "Fraunces[SOFT,WONK,opsz,wght].ttf"
+   ],
+   "下载日期": "2026-10-20"
+  },
+  {
+   "目录": "InstrumentSerif",
+   "字体名": "Instrument Serif",
+   "对应角色": "serif2(拉丁)",
+   "授权": "SIL OFL 1.1",
+   "商用": "是",
+   "授权文件": [
+    "OFL.txt"
+   ],
+   "来源": "https://github.com/google/fonts/tree/main/ofl/instrumentserif",
+   "适合用途": "细长优雅的拉丁大字、斜体点缀",
+   "备注": "Regular + Italic,窄体",
+   "文件": [
+    "InstrumentSerif-Italic.ttf",
+    "InstrumentSerif-Regular.ttf"
+   ],
+   "下载日期": "2026-10-20"
+  },
+  {
+   "目录": "DMSerifDisplay",
+   "字体名": "DM Serif Display",
+   "对应角色": "(备用拉丁衬线展示)",
+   "授权": "SIL OFL 1.1",
+   "商用": "是",
+   "授权文件": [
+    "OFL.txt"
+   ],
+   "来源": "https://github.com/google/fonts/tree/main/ofl/dmserifdisplay",
+   "适合用途": "粗对比的拉丁大标题",
+   "备注": "Regular + Italic",
+   "文件": [
+    "DMSerifDisplay-Regular.ttf"
+   ],
+   "下载日期": "2026-10-20"
+  },
+  {
+   "目录": "LXGW-WenKai",
+   "字体名": "霞鹜文楷 LXGW WenKai",
+   "对应角色": "hand",
+   "授权": "SIL OFL 1.1(含保留字体名:商用视频没问题,不要把改造后的字体改名发行)",
+   "商用": "是",
+   "授权文件": [
+    "OFL.txt"
+   ],
+   "来源": "https://github.com/lxgw/LxgwWenKai",
+   "适合用途": "人文、手写、温暖的句子;旁白式小字",
+   "备注": "Regular/Medium;文件较大(各约 25MB)",
+   "文件": [
+    "LXGWWenKai-Medium.ttf",
+    "LXGWWenKai-Regular.ttf"
+   ],
+   "下载日期": "2026-10-20"
+  },
+  {
+   "目录": "ZCOOL-QingKe-HuangYou",
+   "字体名": "站酷庆科黄油体",
+   "对应角色": "punch",
+   "授权": "SIL OFL 1.1",
+   "商用": "是",
+   "授权文件": [
+    "OFL.txt"
+   ],
+   "来源": "https://github.com/google/fonts/tree/main/ofl/zcoolqingkehuangyou",
+   "适合用途": "冲击、海报感、短词(1–4 字)",
+   "备注": "单一字重,很重;不适合小字和长句",
+   "文件": [
+    "ZCOOLQingKeHuangYou-Regular.ttf"
+   ],
+   "下载日期": "2026-10-20"
+  },
+  {
+   "目录": "ZCOOL-XiaoWei",
+   "字体名": "站酷小薇体",
+   "对应角色": "(备用中文衬线展示)",
+   "授权": "SIL OFL 1.1",
+   "商用": "是",
+   "授权文件": [
+    "OFL.txt"
+   ],
+   "来源": "https://github.com/google/fonts/tree/main/ofl/zcoolxiaowei",
+   "适合用途": "文艺、留白、疏朗的短标题",
+   "备注": "单一字重,笔画较细",
+   "文件": [
+    "ZCOOLXiaoWei-Regular.ttf"
+   ],
+   "下载日期": "2026-10-20"
+  },
+  {
+   "目录": "SmileySans",
+   "字体名": "得意黑 Smiley Sans",
+   "对应角色": "oblique",
+   "授权": "SIL OFL 1.1(含保留字体名)",
+   "商用": "是",
+   "授权文件": [
+    "OFL.txt"
+   ],
+   "来源": "https://github.com/atelier-anchor/smiley-sans",
+   "适合用途": "动感、斜体、科技感短词",
+   "备注": "Oblique 单一款;倾斜自带速度感",
+   "文件": [
+    "SmileySans-Oblique.otf",
+    "SmileySans-Oblique.ttf"
+   ],
+   "下载日期": "2026-10-20"
+  },
+  {
+   "目录": "SpaceGrotesk",
+   "字体名": "Space Grotesk",
+   "对应角色": "grot(拉丁)",
+   "授权": "SIL OFL 1.1",
+   "商用": "是",
+   "授权文件": [
+    "OFL.txt"
+   ],
+   "来源": "https://github.com/google/fonts/tree/main/ofl/spacegrotesk",
+   "适合用途": "几何感拉丁标题、数字",
+   "备注": "可变字重 300–700",
+   "文件": [
+    "SpaceGrotesk[wght].ttf"
+   ],
+   "下载日期": "2026-10-20"
+  },
+  {
+   "目录": "BricolageGrotesque",
+   "字体名": "Bricolage Grotesque",
+   "对应角色": "bric(拉丁)",
+   "授权": "SIL OFL 1.1",
+   "商用": "是",
+   "授权文件": [
+    "OFL.txt"
+   ],
+   "来源": "https://github.com/google/fonts/tree/main/ofl/bricolagegrotesque",
+   "适合用途": "有个性的拉丁标题,字面松弛",
+   "备注": "可变:光学尺寸/宽度/字重",
+   "文件": [
+    "BricolageGrotesque[opsz,wdth,wght].ttf"
+   ],
+   "下载日期": "2026-10-20"
+  },
+  {
+   "目录": "JetBrainsMono",
+   "字体名": "JetBrains Mono",
+   "对应角色": "mono(拉丁)",
+   "授权": "SIL OFL 1.1",
+   "商用": "是",
+   "授权文件": [
+    "OFL.txt"
+   ],
+   "来源": "https://github.com/google/fonts/tree/main/ofl/jetbrainsmono",
+   "适合用途": "代码、网址、数据、终端",
+   "备注": "可变字重 100–800",
+   "文件": [
+    "JetBrainsMono[wght].ttf"
+   ],
+   "下载日期": "2026-10-20"
+  },
+  {
+   "目录": "DejaVuSansMono",
+   "字体名": "DejaVu Sans Mono",
+   "对应角色": "(备用等宽)",
+   "授权": "Bitstream Vera / DejaVu 免费许可",
+   "商用": "是",
+   "授权文件": [
+    "DejaVu-LICENSE.txt"
+   ],
+   "来源": "https://dejavu-fonts.github.io/",
+   "适合用途": "备用等宽",
+   "备注": "Regular/Bold",
+   "文件": [
+    "DejaVuSansMono-Bold.ttf",
+    "DejaVuSansMono.ttf"
+   ],
+   "下载日期": "2026-10-20"
+  }
+ ]
+}

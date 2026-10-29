@@ -1,0 +1,7 @@
+本目录字体的许可(均允许免费使用与再分发):
+
+- Inter / InterDisplay (*.otf) —— SIL Open Font License 1.1。项目主页 https://github.com/rsms/inter
+- NotoSansSC-*.otf(思源黑体 简体中文) —— SIL Open Font License 1.1。项目主页 https://github.com/notofonts/noto-cjk
+- DejaVuSansMono*.ttf —— Bitstream Vera / DejaVu 字体许可(自由使用与再分发)。许可全文见同目录 DejaVu-LICENSE.txt
+
+SIL OFL 1.1 全文:https://openfontlicense.org/open-font-license-official-text/

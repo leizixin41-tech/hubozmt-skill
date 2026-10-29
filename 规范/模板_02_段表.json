@@ -1,0 +1,50 @@
+{
+ "_说明": "复制到本期文件夹改名为 02_段表.json。字段含义见 规范/01_策划检查清单.md;完整例子见 episodes/_示例_规范v2_scrapling/02_段表.json。时间一律取自 work/words.json。",
+ "version": 2,
+ "title": "<本期标题>",
+ "palette": {"bg": "#E4E7E1", "ink": "#121412", "mute": "#7A8176", "main": "<项目主色>", "accent": "#FF5A1F", "mark": "#FFE14A", "card": "#F6F8F3", "line": "#D2D6CC", "dark": "#0B0C0A"},
+ "segments": [
+  {
+   "id": 1, "t0": 0.0, "t1": 2.4, "kind": "hook",
+   "vo": "<开场口播原文>",
+   "logic": "<先抛定位,让人停下来>",
+   "ui_shot": "纯字开场(≤3 秒):<主词> + 远景淡字",
+   "assets": [],
+   "interactions": [],
+   "text_role": [
+    {"text": "<主词>", "role": "title", "layer": "front"},
+    {"text": "<淡字>", "role": "note", "layer": "back"}
+   ],
+   "depth_plan": {"front": ["主词"], "back": ["淡字"], "focus": "front"}
+  },
+  {
+   "id": 2, "t0": 2.4, "t1": 6.0, "kind": "case",
+   "vo": "<这段口播原文>",
+   "logic": "<观众该看懂的逻辑,一句话>",
+   "ui_shot": "<主视觉:哪张截图、哪一层、占多大>",
+   "assets": [
+    {"file": "shots/<截图名>.png", "role": "screenshot", "boxes": ["<区域名>"]},
+    {"role": "copy", "text": "<终端命令或代码原文>", "source": "<出处网址>"}
+   ],
+   "interactions": [
+    {"kind": "frame", "at": 3.0, "target": "shots/<截图名>.png#<区域名>", "label": "<事实标签>", "sfx": "tick"},
+    {"kind": "terminal", "at": 3.6, "target": "前景终端", "sfx": "keytap"}
+   ],
+   "text_role": [{"text": "<主标题>", "role": "title", "layer": "front"}],
+   "depth_plan": {"front": ["终端", "主标题"], "mid": ["截图 + 框选"], "focus": "front"}
+  },
+  {
+   "id": 3, "t0": 6.0, "t1": 9.0, "kind": "end",
+   "vo": "<收尾口播原文>",
+   "logic": "<收尾:记住仓库地址>",
+   "ui_shot": "仓库名片条 + 星标脉冲",
+   "assets": [{"file": "shots/<截图名>.png", "role": "screenshot", "boxes": ["star"]}],
+   "interactions": [{"kind": "pulse", "at": 7.5, "target": "shots/<截图名>.png#star", "sfx": "chime"}],
+   "text_role": [
+    {"text": "<收尾主标题>", "role": "title", "layer": "front"},
+    {"text": "github.com/<作者>/<仓库>", "role": "note", "layer": "front"}
+   ],
+   "depth_plan": {"front": ["主标题"], "mid": ["名片条"], "focus": "front"}
+  }
+ ]
+}

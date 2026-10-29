@@ -1,0 +1,20 @@
+# 环境
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
+.libtv/
+# 每期的口播、成片、中间文件、音视频都不进仓库
+episodes/*/input/
+episodes/*/out/
+episodes/*/work/*
+!episodes/_示例_规范v2_scrapling/work/words.json
+!episodes/_示例_规范v2_scrapling/work/transcript.md
+*.mp4
+*.mov
+*.webm
+*.wav
+*.mp3
+*.m4a
+# 本机放大工具(自行下载,见 README)
+tools/bin/

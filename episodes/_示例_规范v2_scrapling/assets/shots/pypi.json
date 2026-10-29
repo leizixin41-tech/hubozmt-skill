@@ -1,0 +1,29 @@
+{
+ "mode": "url",
+ "source": "https://pypi.org/project/scrapling/",
+ "captured": "2026-10-29 07:05",
+ "scale": 2.0,
+ "el": null,
+ "theme": null,
+ "boxes": {
+  "pip": [
+   0.0742,
+   0.2783,
+   0.1716,
+   0.06
+  ]
+ },
+ "clip": [
+  0,
+  0,
+  1280,
+  800
+ ],
+ "boxes_missing": [
+  "name"
+ ],
+ "size": [
+  2560,
+  1600
+ ]
+}

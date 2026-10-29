@@ -1,0 +1,12 @@
+#!/bin/bash
+# hubozmt-skill 统一入口:  hz <工具> [参数...]
+# 工具: ingest cut render sfx check capture gen asset dissect
+HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+PY="$HERE/.venv/bin/python"
+[ -x "$PY" ] || PY="$HERE/../.venv/bin/python"
+[ -x "$PY" ] || PY="$(command -v python3)"
+T="$1"; shift
+if [ -z "$T" ] || [ ! -f "$HERE/tools/$T.py" ]; then
+  echo "用法: hz <工具> [参数]   可用工具:"; ls "$HERE/tools" | grep -v '^_' | sed -n 's/\.py$//p' | sed 's/^/  /'; exit 1
+fi
+exec "$PY" "$HERE/tools/$T.py" "$@"

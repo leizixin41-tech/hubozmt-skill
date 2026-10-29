@@ -1,0 +1,32 @@
+{
+ "mode": "url",
+ "source": "https://scrapling.readthedocs.io/en/latest/parsing/adaptive.html",
+ "captured": "2026-10-29 07:06",
+ "scale": 2.0,
+ "el": null,
+ "theme": "light",
+ "boxes": {
+  "h1": [
+   0.2578,
+   0.2913,
+   0.4844,
+   0.0457
+  ],
+  "intro": [
+   0.2578,
+   0.575,
+   0.4844,
+   0.1013
+  ]
+ },
+ "clip": [
+  0,
+  0,
+  1280,
+  800
+ ],
+ "size": [
+  2560,
+  1600
+ ]
+}

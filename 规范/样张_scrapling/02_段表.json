@@ -1,0 +1,140 @@
+{
+ "version": 2,
+ "title": "Scrapling · 规范 v2 样张",
+ "palette": {"bg": "#E4E7E1", "ink": "#121412", "mute": "#7A8176", "main": "#5CB81A", "accent": "#FF5A1F", "mark": "#FFE14A", "card": "#F6F8F3", "line": "#D2D6CC", "dark": "#0B0C0A"},
+ "segments": [
+  {
+   "id": 1, "t0": 0.0, "t1": 2.45, "kind": "hook",
+   "vo": "爬虫界的核弹级开源项目来了",
+   "logic": "先抛定位,让人停下来",
+   "ui_shot": "纯字开场(≤3 秒):核弹级大字 + 远景淡字 SCRAPE",
+   "assets": [],
+   "interactions": [],
+   "text_role": [
+    {"text": "核弹级", "role": "title", "layer": "front"},
+    {"text": "爬虫界的", "role": "sub", "layer": "front"},
+    {"text": "开源项目来了", "role": "sub", "layer": "front"},
+    {"text": "SCRAPE", "role": "note", "layer": "back"}
+   ],
+   "depth_plan": {"front": ["三行字"], "back": ["SCRAPE 淡字"], "focus": "front"}
+  },
+  {
+   "id": 2, "t0": 2.45, "t1": 3.8, "kind": "case",
+   "vo": "记住这个项目",
+   "logic": "认人:仓库名和作者就在 GitHub 页面上",
+   "ui_shot": "GitHub 仓库页上半部(中景),框住仓库名",
+   "assets": [{"file": "shots/gh_repo.png", "role": "screenshot", "boxes": ["title"]}],
+   "interactions": [{"kind": "frame", "at": 2.62, "target": "shots/gh_repo.png#title", "label": "D4Vinci / Scrapling", "sfx": "tick"}],
+   "text_role": [{"text": "记住这个项目", "role": "title", "layer": "front"}],
+   "depth_plan": {"front": ["记住这个项目"], "mid": ["仓库页截图 + 框选"], "focus": "mid"}
+  },
+  {
+   "id": 3, "t0": 3.8, "t1": 6.26, "kind": "case",
+   "vo": "直接刷新了 Python 爬虫的技术上限",
+   "logic": "上手门槛低:PyPI 上一行命令就装好",
+   "ui_shot": "PyPI 项目页(中景)+ 终端敲 pip install(前景)",
+   "assets": [
+    {"file": "shots/pypi.png", "role": "screenshot", "boxes": ["pip"]},
+    {"role": "copy", "text": "pip install scrapling", "source": "https://pypi.org/project/scrapling/"}
+   ],
+   "interactions": [
+    {"kind": "frame", "at": 4.0, "target": "shots/pypi.png#pip", "label": "官方安装命令", "sfx": "tick"},
+    {"kind": "terminal", "at": 4.3, "target": "终端", "sfx": "keytap"}
+   ],
+   "text_role": [{"text": "技术上限", "role": "title", "layer": "front"}],
+   "depth_plan": {"front": ["终端", "技术上限"], "mid": ["PyPI 截图"], "focus": "front"}
+  },
+  {
+   "id": 4, "t0": 6.26, "t1": 9.7, "kind": "case",
+   "vo": "现在 GitHub 上已经飙到了 90K 的 Stars",
+   "logic": "热度是真的:仓库页上的星标数",
+   "ui_shot": "GitHub 仓库页大图(中景,占画面 1/4 以上),框住 Star 按钮",
+   "assets": [{"file": "shots/gh_repo.png", "role": "screenshot", "boxes": ["star"]}],
+   "interactions": [
+    {"kind": "count", "at": 7.85, "target": "数字 0→90,271", "sfx": "tick"},
+    {"kind": "frame", "at": 8.5, "target": "shots/gh_repo.png#star", "label": "★ 90.3k", "sfx": "pop"}
+   ],
+   "text_role": [
+    {"text": "90,271", "role": "title", "layer": "front"},
+    {"text": "GitHub Stars", "role": "sub", "layer": "front"}
+   ],
+   "depth_plan": {"front": ["数字"], "mid": ["仓库页截图"], "focus": "mid"}
+  },
+  {
+   "id": 5, "t0": 9.7, "t1": 13.3, "kind": "case",
+   "vo": "自带强大的智能识别能力,无论网站怎么改版",
+   "logic": "改版是什么样:官方文档里的改版前 / 改版后 HTML",
+   "ui_shot": "官方文档页(中景)+ 改版前后 HTML 对比(前景)",
+   "assets": [
+    {"file": "shots/docs_adaptive.png", "role": "screenshot", "boxes": ["h1"]},
+    {"role": "copy", "text": "改版前/改版后 HTML 结构", "source": "https://github.com/D4Vinci/Scrapling/blob/main/docs/parsing/adaptive.md"}
+   ],
+   "interactions": [
+    {"kind": "frame", "at": 10.55, "target": "shots/docs_adaptive.png#h1", "label": "自适应抓取", "sfx": "tick"},
+    {"kind": "swap", "at": 12.35, "target": "HTML 改版前→改版后", "sfx": "swish"}
+   ],
+   "text_role": [{"text": "智能识别", "role": "title", "layer": "front"}],
+   "depth_plan": {"front": ["改版对比", "智能识别"], "mid": ["文档截图"], "focus": "front"}
+  },
+  {
+   "id": 6, "t0": 13.3, "t1": 17.1, "kind": "case",
+   "vo": "页面结构怎么调整,它都能自动精准抓取内容",
+   "logic": "同一个选择器 #p1,改版后照样找到",
+   "ui_shot": "改版后 HTML(中景)+ 官方示例代码逐字敲出(前景),高亮 adaptive=True",
+   "assets": [
+    {"file": "shots/docs_adaptive.png", "role": "screenshot"},
+    {"role": "copy", "text": "element = page.css('#p1', adaptive=True)", "source": "https://github.com/D4Vinci/Scrapling/blob/main/docs/parsing/adaptive.md"}
+   ],
+   "interactions": [
+    {"kind": "code", "at": 13.7, "target": "示例代码", "sfx": "keytap"},
+    {"kind": "hl", "at": 15.7, "target": "代码第 3 行", "sfx": "swish"},
+    {"kind": "frame", "at": 16.0, "target": "改版后 HTML 第 4 行", "label": "#p1 照样找到", "sfx": "pop"}
+   ],
+   "text_role": [{"text": "自动精准抓取", "role": "title", "layer": "front"}],
+   "depth_plan": {"front": ["代码块", "自动精准抓取"], "mid": ["改版后 HTML"], "back": ["文档截图(虚)"], "focus": "front"}
+  },
+  {
+   "id": 7, "t0": 17.1, "t1": 19.55, "kind": "case",
+   "vo": "全程不用动半行代码,动态加载",
+   "logic": "浏览器加载动态页面 → 内容出来就被抓到",
+   "ui_shot": "浏览器假窗:地址栏输入 → 转圈 → 真实页面截图出现,框住第一条内容",
+   "assets": [{"file": "shots/quotes.png", "role": "screenshot", "boxes": ["quote"]}],
+   "interactions": [
+    {"kind": "load", "at": 18.35, "target": "浏览器窗", "sfx": "pop"},
+    {"kind": "frame", "at": 18.4, "target": "shots/quotes.png#quote", "label": "抓到内容", "sfx": "tick"}
+   ],
+   "text_role": [
+    {"text": "动态加载", "role": "title", "layer": "front"},
+    {"text": "StealthyFetcher", "role": "label", "layer": "front"}
+   ],
+   "depth_plan": {"front": ["动态加载", "StealthyFetcher"], "mid": ["浏览器窗"], "focus": "mid"}
+  },
+  {
+   "id": 8, "t0": 19.55, "t1": 24.45, "kind": "case",
+   "vo": "浏览器指纹这些让人头大的反爬手段,它都给你适配的妥妥当当",
+   "logic": "反爬能力是 README 里写明的:逐条点名再一起打勾",
+   "ui_shot": "满幅暗场;README 能力清单截图(中景)依次框选,右侧能力 pills 逐个点亮(前景)",
+   "assets": [{"file": "shots/gh_fetching.png", "role": "crop", "boxes": ["tls", "antibot"]}],
+   "interactions": [
+    {"kind": "frame", "at": 19.95, "target": "shots/gh_fetching.png#tls", "label": "TLS 指纹伪装", "sfx": "tick"},
+    {"kind": "frame", "at": 21.5, "target": "shots/gh_fetching.png#antibot", "label": "反爬绕过", "sfx": "tick"},
+    {"kind": "pills", "at": 22.7, "target": "能力 pills", "sfx": "pop"}
+   ],
+   "text_role": [{"text": "反爬手段", "role": "title", "layer": "front"}],
+   "depth_plan": {"front": ["pills", "反爬手段"], "mid": ["README 截图"], "focus": "mid"}
+  },
+  {
+   "id": 9, "t0": 24.45, "t1": 27.6, "kind": "end",
+   "vo": "拿来就能上手,真的非常好用",
+   "logic": "收尾:记住仓库地址",
+   "ui_shot": "仓库名片条(仓库页顶部一条)+ 星标脉冲",
+   "assets": [{"file": "shots/gh_repo.png", "role": "screenshot", "boxes": ["star"]}],
+   "interactions": [{"kind": "pulse", "at": 25.95, "target": "shots/gh_repo.png#star", "sfx": "chime"}],
+   "text_role": [
+    {"text": "拿来就能上手", "role": "title", "layer": "front"},
+    {"text": "github.com/D4Vinci/Scrapling", "role": "note", "layer": "front"}
+   ],
+   "depth_plan": {"front": ["拿来就能上手"], "mid": ["名片条"], "focus": "front"}
+  }
+ ]
+}
